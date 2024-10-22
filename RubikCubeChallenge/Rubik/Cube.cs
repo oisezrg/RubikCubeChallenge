@@ -1,25 +1,30 @@
 ﻿using RubikCubeChallenge.Abstraction;
 using RubikCubeChallenge.Printer;
-using RubikCubeChallenge.Utilities;
 
 namespace RubikCubeChallenge.Rubik
 {
     public class Cube : ICube
     {
-        private readonly IPrinter printer;
+        private readonly IPrinter? printer;
         private readonly ICubeFaceFactory cubeFaceFactory;
 
         public Cube(ICubeFaceFactory cubeFaceFactory)
         {
-            Require.NotNull(cubeFaceFactory, nameof(cubeFaceFactory));
-
+            ArgumentNullException.ThrowIfNull(cubeFaceFactory, nameof(cubeFaceFactory)); 
             this.cubeFaceFactory = cubeFaceFactory;
+
             Reset();
+            ArgumentNullException.ThrowIfNull(Front, nameof(Front));
+            ArgumentNullException.ThrowIfNull(Left, nameof(Left));
+            ArgumentNullException.ThrowIfNull(Right, nameof(Right));
+            ArgumentNullException.ThrowIfNull(Down, nameof(Down));
+            ArgumentNullException.ThrowIfNull(Back, nameof(Back));
+            ArgumentNullException.ThrowIfNull(Up, nameof(Up));
         }
 
         public Cube(IPrinter printer, ICubeFaceFactory cubeFaceFactory) : this(cubeFaceFactory)
         {
-            Require.NotNull(printer, nameof(printer));
+            ArgumentNullException.ThrowIfNull(printer, nameof(printer));
 
             this.printer = printer;
         }
@@ -36,6 +41,8 @@ namespace RubikCubeChallenge.Rubik
 
         public void Print()
         {
+            ArgumentNullException.ThrowIfNull(printer, nameof(printer));
+
             printer.Print(this);
         }
 

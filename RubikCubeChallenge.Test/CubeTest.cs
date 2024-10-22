@@ -8,8 +8,8 @@ namespace RubikCubeChallenge.Test
 {
     internal class CubeTestSut
     {
-        public Cube Sut { get; set; }
-        public Mock<ICubeFace> CubeFaceMock { get; set; }
+        public required Cube Sut { get; set; }
+        public required Mock<ICubeFace> CubeFaceMock { get; set; }
     }
     internal class CubeTest
     {

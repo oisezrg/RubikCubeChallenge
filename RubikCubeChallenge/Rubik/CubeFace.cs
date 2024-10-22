@@ -8,7 +8,7 @@ namespace RubikCubeChallenge.Rubik
         public CubeFace() { }
         public CubeFace(Tile tile)
         {
-            Require.NotNull(tile, nameof(tile));
+            ArgumentNullException.ThrowIfNull(tile, nameof(tile));
 
             LeftTop = CenterTop = RightTop = LeftCenter = CenterCenter = RightCenter = LeftBottom = CenterBottom = RightBottom = tile;
         }
@@ -32,6 +32,11 @@ namespace RubikCubeChallenge.Rubik
             if (obj == null) return false;
 
             return GetTiles().SequenceEqual(((CubeFace)obj).GetTiles());
+        }
+
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(GetTiles());
         }
 
         public void RotateFaceClockwise()
@@ -62,8 +67,8 @@ namespace RubikCubeChallenge.Rubik
 
         public Tile[] ReplaceEdge(AbsoluteDirection edgeDirection, Tile[] incomingTiles)
         {
-            Require.NotNull(edgeDirection, nameof(edgeDirection));
-            Require.NotNull(incomingTiles, nameof(incomingTiles));
+            ArgumentNullException.ThrowIfNull(edgeDirection, nameof(edgeDirection));
+            ArgumentNullException.ThrowIfNull(incomingTiles, nameof(incomingTiles));
             Require.Equals(incomingTiles.Length, 3, nameof(incomingTiles));
 
 
@@ -96,7 +101,7 @@ namespace RubikCubeChallenge.Rubik
 
         public Tile[] GetEdgeTiles(AbsoluteDirection edgeDirection)
         {
-            Require.NotNull(edgeDirection, nameof(edgeDirection));
+            ArgumentNullException.ThrowIfNull(edgeDirection, nameof(edgeDirection));
 
             Tile[] result = new Tile[3];
             switch (edgeDirection)

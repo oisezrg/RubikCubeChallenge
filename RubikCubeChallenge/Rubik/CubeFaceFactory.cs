@@ -1,5 +1,4 @@
 ﻿using RubikCubeChallenge.Abstraction;
-using RubikCubeChallenge.Utilities;
 
 namespace RubikCubeChallenge.Rubik
 {
@@ -7,8 +6,7 @@ namespace RubikCubeChallenge.Rubik
     {
         public ICubeFace CreateCubeFace(Tile tile)
         {
-            Require.NotNull(tile, nameof(tile));
-
+            ArgumentNullException.ThrowIfNull(tile, nameof(tile));
             return new CubeFace(tile);
         }
     }
